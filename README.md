@@ -52,3 +52,5 @@ def main():
             print("Wrong file")
     navigation(data)
 ```
+## Conclusion
+That module helps us "run" through the json file without any problems (any cases are taken into account and don't cause the errors)

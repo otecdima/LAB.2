@@ -6,6 +6,8 @@ import sys
 def reading_json(path_to_json):
     """
     Reads the json file
+    >>> reading_json("twitter1.json") #doctest: +ELLIPSIS
+    [{'created_at': 'Sun Jan 30 16:36:22 +0000 2022',...
     """
     with open(path_to_json, "r", encoding='utf-8') as new_file:
         data = json.load(new_file)

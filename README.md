@@ -1,22 +1,54 @@
 # LAB 2.2
 
-The goal of the lab is the simple navigation in the json file. 
+The goal of the lab is the simple navigation in the json file. The user can navigate through the lists and dictionaries in converted json file and find information in different locations.
 
-## Functions
+## Reading the file
 ```diff
-1. reading_json(path_to_json) 
+reading_json(path_to_json) 
+
+```
+It helps us to read the file with json library, using json.load()
+```python
+def reading_json(path_to_json):
+    """
+    Reads the json file
+    >>> reading_json("twitter1.json") #doctest: +ELLIPSIS
+    [{'created_at': 'Sun Jan 30 16:36:22 +0000 2022',...
+    """
+    with open(path_to_json, "r", encoding='utf-8') as new_file:
+        data = json.load(new_file)
+    return data
 ```
 
-   It helps us to read the file with json library.
+   
+## Checking of the user's intention
 ```diff
-2. checking()
+checking()
 ```
-   Checks if the user really wants to explore the data, by entering y or n in command line.
+   Checks if the user really wants to explore the data, by entering "y" or "n" in command line.
+## The navigation through the file
 ```diff
-3. navigation(data)
+navigation(data)
 ```
    The function for navigating in the file, using recursion.
+Firstly we check if the data which we extract from json is list or dictionary, they both have the algorithms on that cases. Ans then we use recursing to go deeply into the file. 
+## Main 
 ```diff
-4. main()
+main()
 ```
-   The main function to get the navigation in json file.
+   The main function to get the navigation in json file, using the functions above.
+```python
+def main():
+    """
+    Main function to run all the functions
+    """
+    while True:
+        try:
+            path_to_json = input("Enter the path to json file: ")
+            data = reading_json(path_to_json)
+            checking()
+            break
+        except FileNotFoundError:
+            print("Wrong file")
+    navigation(data)
+```

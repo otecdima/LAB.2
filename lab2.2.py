@@ -50,13 +50,9 @@ def navigation(data):
         print("----------------------")
         print("Please, enter the number of the object, you want to explore")
         number = input()
-        while True:
-            if not(1 <= int(number) <= len_of_json):
-                print("Please, enter the the right number of the object, you want to explore")
-            if not(number.isdigit()):
-                print("Please, enter the the number, not a letter")
-            else:
-                break
+        while not(number.isdigit() and 0 < int(number) < len_of_json + 1):
+            print("Please, enter the the right number of the object, you want to explore")
+            number = input()
         print(f"You choose the {number} object")
         print()
         navigation(data[int(number) - 1])

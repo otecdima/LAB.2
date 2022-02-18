@@ -54,3 +54,72 @@ def main():
 ```
 ## Conclusion
 ___That module helps us "run" through the json file without any problems (any cases are taken into account and don't cause the errors)___
+
+# Lab 2.3
+
+The goal of that lab was to learn how to get and work with API in Twitter, to get the location of friends of the username that we write on the site.
+
+## Getting information
+```diff
+get_information_from_keys(username)
+```
+The first function help to get the information about friends of the user (username) using key and module requests:
+```python
+def get_information_from_keys(username):
+    """
+    Return dictionary with information about friends on Twitter.
+    """
+    key = 'AAAAAAAAAAAAAAAAAAAAABcXZQEAAAAAFitawJoUzroZoiCP41R0%2F\
+yXXPHc%3DvATE65kkopZn2sQBHIXT5bCRF1v61uESR5ZGGDfR94pOiEldUd'
+    headers = {'Authorization': f'Bearer {key}'}
+    params = {'screen_name': username, 'count': 200}
+
+    response = requests.get('https://api.twitter.com/1.1/friends/list.json',
+                            headers=headers,
+                            params=params)
+    return response.json()
+```
+## Getting location
+```
+get_location(info)
+```
+The function reads the info, which is in dictionary type, and returns the list with the username of a friend as the first element, and tuple of coordinates as the second one.
+## Building a map
+```
+building_map(list_with_coor)
+```
+The function builds the map using the module folium
+## Main
+```
+main(username)
+```
+The main function, which unites all functions
+```python
+def main(username):
+    """
+    Manin function with all the previous ones
+    """
+    info = get_information_from_keys(username)
+    list_with_coor = get_location(info)
+    if list_with_coor == False:
+        return False
+    else:
+        building_map(list_with_coor)
+```
+
+## The problem, I encountered
+When the username doesn't exist or doesn't have friends, that function returns the same template with the HTML page with the form.
+```python
+def run_a_site():
+    """
+    Using of method POST for getting usernames and creating a mao according to that username
+    """
+    username = request.form['text']
+    mainf = main(username)
+    if mainf == False:
+        return render_template('index.html')
+    else:
+        return render_template('mapwithfriends.html')
+```
+## Conclusion
+___That laboratory work was quite useful, we got acquainted with new modules and how to work with them.___

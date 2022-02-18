@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Twitter friends</title>
+    <style>
+
+        html, body {
+            height: 100%;
+        }
+
+        html {
+            display: table;
+            margin: auto;
+        }
+
+        body {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Find friends!</h1>
+    <form name="test", action="{{ url_for('run_a_site') }}", method="post">
+        <input type="text", name="text", placeholder="@Username">
+        <button>Find!</button>
+    </form>
+</body>
+</html>
